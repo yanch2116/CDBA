@@ -3,9 +3,9 @@
 There are two blender add-ons for SMPL skeleton's poses and trans.The first is for making an offline visual demo.The second is to make a live visual demo.
 
 ## Offline Motion Capture
-Show two demos
+Show one demo
 ![image](https://github.com/yanch2116/Blender-addons-for-SMPL/blob/master/sources/Dance.gif)
-![image](https://github.com/yanch2116/Blender-addons-for-SMPL/blob/master/sources/Dance1.gif)
+
 You need to follow these steps to use the first add-on.
 
 1. Open a blender file and import the fbx file of a model with SMPL skeleton
