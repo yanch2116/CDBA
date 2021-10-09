@@ -12,11 +12,13 @@ You need to follow these steps to use the first add-on.
 
 > I downloaded a model on [Mixamo](https://www.mixamo.com) that happened to be an SMPL skeleton, and I changed the name of each bone so that the code could find the bones and act on them.You can find it in sources folder.
 
+> 
+
 > If you want to use your own model, make sure that the skeleton is SMPL skeleton and that the bones are named the same as in the code.
 
 > Also, you need to change the name of model to Armature1.
 
-2. Prepare the pkl file
+1. Prepare the pkl file
 
 > You need to prepare a pkl file, datas can be read by `pickling.load(f)['model']`, where f stands for pkl file. 
 

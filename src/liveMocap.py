@@ -1,28 +1,30 @@
 from mathutils import Matrix, Vector, Quaternion
 from math import radians
 import numpy as np
+import bpy
 import json
 import socket
-import bpy
+
 bl_info = {
-    "name": "Real Time Mocap",
+    "name": "Character Driven: Live Mocap",
     "author": "yanch2116",
     "blender": (2, 80, 0),
     "version": (1, 0, 0),
 }
 
 
-class Connect(bpy.types.Operator):
-    bl_idname = 'jd.connect'
-    bl_label = 'Connect'
+class LiveMocap(bpy.types.Operator):
+    bl_idname = 'yanch.livemocap'
+    bl_label = 'livemocap'
 
     def execute(self, ctx):
         global mocap_timer
         global SMPL_Importer_
         global s
 
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        SMPL_Importer_ = SMPL_Importer(bpy.context)
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect(('127.0.0.1', 9999))
+        SMPL_Importer_ = SMPL_Importer(ctx)
 
         ctx.window_manager.modal_handler_add(self)
         mocap_timer = ctx.window_manager.event_timer_add(
@@ -31,13 +33,15 @@ class Connect(bpy.types.Operator):
         return {'RUNNING_MODAL'}
 
     def modal(self, ctx, evt):
-
         if evt.type == 'TIMER':
-            s.sendto(b'1', ('127.0.0.1', 9999))
-            data = json.loads(s.recv(2048))
+            s.send(b'1')
+            data = s.recv(4096)
             if data:
-                SMPL_Importer_.process_poses(data[0], data[1])
+                data = json.loads(data.decode('utf-8'))
+                mode, poses, trans, frame = data
+                SMPL_Importer_.process_poses(mode, poses, trans, frame)
             else:
+                s.close()
                 return {'FINISHED'}
 
         if evt.type == 'A':
@@ -49,6 +53,7 @@ class Connect(bpy.types.Operator):
 class SMPL_Importer:
 
     def __init__(self, context):
+
         self.bone_name_from_index = {
             0: 'Pelvis',
             1: 'L_Hip',
@@ -85,27 +90,39 @@ class SMPL_Importer:
                           [-r[1], r[0], 0]])
         return(cost*np.eye(3) + (1-cost)*r.dot(r.T) + np.sin(theta)*mat)
 
-    def process_pose(self, pose, trans, pelvis_position):
-        pose = np.array(pose)
+    def process_poses(self, mode, poses, trans, current_frame):
+        armature = bpy.data.objects['Armature']
+
+        bpy.ops.object.mode_set(mode='EDIT')
+        pelvis_bone = armature.data.edit_bones[self.bone_name_from_index[0]]
+        pelvis_position = Vector(pelvis_bone.head)
+        bpy.ops.object.mode_set(mode='OBJECT')
+
+        poses = np.array(poses)
         trans = np.array(trans)
-        if pose.shape[0] == 72:
-            rod_rots = pose.reshape(24, 3)
+
+        if poses.shape[0] == 72:
+            rod_rots = poses.reshape(24, 3)
         else:
-            rod_rots = pose.reshape(26, 3)
+            rod_rots = poses.reshape(26, 3)
 
         mat_rots = [self.Rodrigues(rod_rot) for rod_rot in rod_rots]
-        armature = bpy.data.objects['Armature']
-        self.bones = armature.pose.bones
-        self.bones[self.bone_name_from_index[0]].location = Vector(
+
+        bones = armature.pose.bones
+        bones[self.bone_name_from_index[0]].location = Vector(
             (100*trans[1], 100*trans[2], 100*trans[0])) - pelvis_position
+        if mode == 1:
+            bones[self.bone_name_from_index[0]].keyframe_insert(
+                'location', frame=current_frame)
 
         for index, mat_rot in enumerate(mat_rots, 0):
             if index >= 24:
                 continue
 
-            bone = self.bones[self.bone_name_from_index[index]]
+            bone = bones[self.bone_name_from_index[index]]
 
             bone_rotation = Matrix(mat_rot).to_quaternion()
+
             quat_x_90_cw = Quaternion((1.0, 0.0, 0.0), radians(-90))
             quat_x_n135_cw = Quaternion((1.0, 0.0, 0.0), radians(-135))
             quat_x_p45_cw = Quaternion((1.0, 0.0, 0.0), radians(45))
@@ -118,44 +135,30 @@ class SMPL_Importer:
                     quat_x_90_cw @ quat_z_90_cw) @ bone_rotation
             else:
                 bone.rotation_quaternion = bone_rotation
+            if mode == 1:
+                bone.keyframe_insert(
+                    'rotation_quaternion', frame=current_frame)
 
         return
-
-    def process_poses(self, tran, pose):
-
-        self.pose = pose
-        self.tran = tran
-        self.scene = bpy.data.scenes['Scene']
-
-        ob = bpy.data.objects['Armature']
-        self.armature = ob.data
-        bpy.ops.object.mode_set(mode='EDIT')
-        pelvis_bone = self.armature.edit_bones[self.bone_name_from_index[0]]
-        pelvis_position = Vector(pelvis_bone.head)
-        bpy.ops.object.mode_set(mode='OBJECT')
-
-        offset = np.array([self.tran[0], 0, self.tran[2]])
-        self.process_pose(pose,
-                          (tran - offset), pelvis_position)
 
 
 addon_keymaps = []
 
 
 def register():
-    bpy.utils.register_class(Connect)
+    bpy.utils.register_class(LiveMocap)
     wm = bpy.context.window_manager
     kc = wm.keyconfigs.addon
     if kc:
         km = wm.keyconfigs.addon.keymaps.new(
             name='3D View', space_type='VIEW_3D')
         kmi = km.keymap_items.new(
-            Connect.bl_idname, type='W', value='PRESS', ctrl=True)
+            LiveMocap.bl_idname, type='E', value='PRESS', ctrl=True)
         addon_keymaps.append((km, kmi))
 
 
 def unregister():
-    bpy.utils.unregister_class(Connect)
+    bpy.utils.unregister_class(LiveMocap)
     for km, kmi in addon_keymaps:
         km.keymap_items.remove(kmi)
     addon_keymaps.clear()
