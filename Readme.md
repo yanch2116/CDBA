@@ -51,8 +51,8 @@ If you're not familiar with Blender, I've placed a [blender project](/blender/Be
 
 If you need a video background in the demo, select Compositing in the top menu bar, click Open Clip in the Movie Clip, and select your video.
 
-![图 2](images/7cabdcf52c78b5a42642a9acb0d1b835f54376f10fdd11f416e455e5e3b24fc5.png)
+![图 2](/images/7cabdcf52c78b5a42642a9acb0d1b835f54376f10fdd11f416e455e5e3b24fc5.png)
 
 If you are familiar with Blender and want to use your own models, you should make sure it's armature is SMPL's skeleton. The armature should name `Armature` and each bone has the same name as the bones in [demo model](/blender/Alpha.fbx)(Only the 24 bones of SMPL skeleton are needed, and the fingers don't need to change their names).
 
-![图 1](images/29aea27128bebaa15f4c53117e315db0bce6d6de8b1ad5bc9cbec0e557226ab6.png)
+![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)  
