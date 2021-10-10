@@ -4,7 +4,7 @@ import threading
 import pickle
 
 global mode
-mode = 0  # 0 stands for not inserting the frame,1 stands for inserting the frame
+mode = 1  # 0 stands for no insert keyframe,1 stands for insert keyframe
 
 
 def getData():
@@ -14,12 +14,11 @@ def getData():
     data = list(data)
     for i in range(len(data)):
         data[i] = list(data[i])
-    return data
+    return data  # [N,75]  N stands for the number of frames
 
 
 def tcplink(sock, addr):
     print('Accept new connection from %s:%s...' % addr)
-    # sock.send('Connect Succeed!')
     data = getData()
     num_frame = len(data)
     for frame in range(num_frame):
@@ -28,9 +27,9 @@ def tcplink(sock, addr):
             break
         poses = data[frame][:72]
         trans = data[frame][72:75]
+        # The data is [mode,poses,trans,current_frame]
         send_data = json.dumps([mode, poses, trans, frame+1]).encode('utf-8')
         print('The current frame is {}'.format(frame+1))
-        # send_data = json.dumps([mode, json.dumps(poses), json.dumps(trans), frame+1])
         sock.send(send_data)
     sock.close()
     print('Connection from %s:%s closed.' % addr)
