@@ -1,16 +1,16 @@
 import socket
 import json
 import threading
-import pickle
+import numpy as np
 
 global mode
-mode = 1  # 0 stands for no insert keyframe,1 stands for insert keyframe
+mode = 1    # 0 stands for no insert keyframe,1 stands for insert keyframe
 
 
 def getData():
-    path = '/Users/yanch/Downloads/results.pkl'
-    f = open(path, 'rb')
-    data = pickle.load(f)['pred_numpy_save'][0]
+    path = '/Users/yanch/Desktop/CharacterDriven-BlenderAddon/demo/demo1.npy'
+    data = np.load(path, allow_pickle=True)
+    print(data.shape)
     data = list(data)
     for i in range(len(data)):
         data[i] = list(data[i])
