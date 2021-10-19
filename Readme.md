@@ -1,6 +1,7 @@
 # Blender addon for driving character
 
-The addon drives the cartoon character by passing SMPL's poses and global translation into model's armature in Blender. Poses and global translation can be obtained from ROMP or any other 3D pose estimation model. If the model outputs poses and global translation at a high FPS, you can drive cartoon characters in Blender in real time.
+The addon drives the cartoon character by passing SMPL's poses and global translation into 3D model's armature in Blender. Poses and global translation can be obtained from ROMP or any other 3D pose estimation model. If the model outputs poses and global translation at a high FPS, you can drive cartoon characters in Blender in real time.
+
 ## Demo
 
 ![image](Demo1.gif)
@@ -26,7 +27,6 @@ I've written [server.py](/src/server.py) as a example data server (you only need
 
 Real-time data server can be found in [ROMP](https://github.com/Arthur151/ROMP).You just need to run [webcam_blender.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/webcam_blender.sh).
 
-
 ### Data Format
 
 The data is a Python list of four elements in the form of `[mode,poses,global translation,current keyframe id]`.
@@ -47,7 +47,7 @@ The data is a Python list of four elements in the form of `[mode,poses,global tr
 
 ## Something about Blender
 
-If you're not familiar with Blender, I've placed a [blender project](/blender/Beta.blend) in the resources folder to help you.All you need to do is open it and follow [Steps](#steps) to achieve the effect shown in the Demo.(It's better to know something about animation in Blender.)
+If you're not familiar with Blender, I've upload a [blender project](/blender/Beta.blend) to help you.All you need to do is open it and follow [Steps](#steps) to achieve the effect shown in the Demo.(It's better to know something about animation in Blender.)
 
 If you need a video background in the demo, select Compositing in the top menu bar, click Open Clip in the Movie Clip, and select your video.
 
@@ -55,4 +55,4 @@ If you need a video background in the demo, select Compositing in the top menu b
 
 If you are familiar with Blender and want to use your own models, you should make sure it's armature is SMPL's skeleton. The armature should name `Armature` and each bone has the same name as the bones in [demo model](/blender/Alpha.fbx)(Only the 24 bones of SMPL skeleton are needed, and the fingers don't need to change their names).
 
-![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)  
+![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)
