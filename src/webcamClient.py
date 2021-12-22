@@ -10,11 +10,11 @@ import struct
 cap = cv2.VideoCapture(0)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(('localhost', 9998))
+s.connect(('127.0.0.1', 9998))
 
 while cap.isOpened():
     _, frame = cap.read()
-    dim = (128, 128)
+    dim = (512,512)
     frame = cv2.resize(frame, dim, interpolation=cv2.INTER_AREA)
     print(frame[0][0])
     cv2.imshow('frame', frame)

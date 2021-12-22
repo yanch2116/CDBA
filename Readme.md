@@ -43,7 +43,10 @@ The data is a Python list of four elements in the form of `[mode,poses,global tr
 3. Press Ctrl+E in Blender to run addon
 4. Press A in Blender to stop addon or wait until the data transfer is complete
 
-> In step 3, you'd better make Armature active, otherwise bugs may occur. Also, the mouse must be placed in the 3D viewport area(where the 3d model is), otherwise the addon will not run.
+> In step 3, you'd better make Armature active, otherwise bugs may occur (key "Pelvis" not found'). Also, the mouse must be placed in the 3D viewport area(where the 3d model is), otherwise the addon will not run.
+
+![picture 1](images/f385c458c9c3531c74c411689ce74a0cf4ffca92588888b9764775f8c7087f75.png)  
+
 
 ## Something about Blender
 
