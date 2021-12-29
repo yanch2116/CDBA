@@ -1,3 +1,4 @@
+[English](README.md)｜[中](README.zh_CN.md) 
 # Blender addon for driving character
 
 The addon drives the cartoon character by passing SMPL's poses and global translation into 3D model's armature in Blender. Poses and global translation can be obtained from ROMP or any other 3D pose estimation model. If the model outputs poses and global translation at a high FPS, you can drive cartoon characters in Blender in real-time.
@@ -13,7 +14,7 @@ The second demo uses ROMP outputs from the webcam in real-time.
 
 The 3D character is downloaded from [Mixamo](https://www.mixamo.com/#/).
 
-## 
+##
 
 ## How to Use the [add-on](src/characterDriven.py)
 
@@ -49,8 +50,7 @@ The data is a Python list of four elements in the form of `[mode,poses,global tr
 
 > In step 3, you'd better make Armature active, otherwise bugs may occur (key "Pelvis" not found'). Also, the mouse must be placed in the 3D viewport area(where the 3d model is), otherwise the addon will not run.
 
-![picture 1](images/f385c458c9c3531c74c411689ce74a0cf4ffca92588888b9764775f8c7087f75.png)  
-
+![picture 1](images/f385c458c9c3531c74c411689ce74a0cf4ffca92588888b9764775f8c7087f75.png)
 
 ## Something about Blender
 
@@ -65,6 +65,7 @@ If you are familiar with Blender and want to use your own model, you should make
 ![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)
 
 ## Useful Resources
+
 - [Mixamo](https://www.mixamo.com/#/)
 - [Blender 2.8](https://www.bilibili.com/video/BV1T4411N7GE?spm_id_from=333.999.0.0)
 - [Blender 2.9-3.0](https://www.bilibili.com/video/BV1zh411Y7LX?from=search&seid=12526205672689328022&spm_id_from=333.337.0.0)
