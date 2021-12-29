@@ -61,3 +61,13 @@ If you need a video background in the demo, select Compositing in the top menu b
 If you are familiar with Blender and want to use your own model, you should make sure it's armature is SMPL's skeleton. The armature should name Armature and each bone has the same name as the bones in [demo model](blender/Alpha.fbx)(Only the 24 bones of SMPL skeleton are needed, and the fingers don't need to change their names).
 
 ![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)
+
+## Useful Resources
+- [Mixamo](https://www.mixamo.com/#/)
+- [Blender 2.8](https://www.bilibili.com/video/BV1T4411N7GE?spm_id_from=333.999.0.0)
+- [Blender 2.9-3.0](https://www.bilibili.com/video/BV1zh411Y7LX?from=search&seid=12526205672689328022&spm_id_from=333.337.0.0)
+- [Blender Manual](https://docs.blender.org/manual/en/latest/)
+- [Blender Python API](https://docs.blender.org/api/current/index.html)
+- [neuron_mocap_live-blender](https://github.com/pnmocap/neuron_mocap_live-blender)
+- [QuickMocap-BlenderAddon](https://github.com/vltmedia/QuickMocap-BlenderAddon)
+- [remote-opencv-streaming-live-video](https://github.com/rena2damas/remote-opencv-streaming-live-video)
