@@ -5,6 +5,7 @@ __pycache__/
 .DS_Store
 patent
 *.blend1
+*.fbx
 
 # C extensions
 *.so
