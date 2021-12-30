@@ -65,7 +65,7 @@ If you need a video background in the demo, select Compositing in the top menu b
 
 ## Acknowledgement
 
-- 3D characters are downloaded from [Mixamo](https://www.mixamo.com/#/)
+- 3D character is downloaded from [Mixamo](https://www.mixamo.com/#/)
 - [Blender 2.8](https://www.bilibili.com/video/BV1T4411N7GE?spm_id_from=333.999.0.0)
 - [Blender Manual](https://docs.blender.org/manual/en/latest/)
 - [Blender Python API](https://docs.blender.org/api/current/index.html)
