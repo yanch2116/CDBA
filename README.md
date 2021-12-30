@@ -41,7 +41,7 @@ The addon is a data requester that uses TCP to send data requests to `127.0.0.1:
 
 ### Data Sender
 
-The data sender is bound to '127.0.0.1:9999' and will continuously send data to it after receiving requests from the data requester.
+The data sender is bound to `127.0.0.1:9999` and will continuously send data to it after receiving requests from the data requester.
 
 ### Data Format
 
