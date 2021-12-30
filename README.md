@@ -1,36 +1,47 @@
-[English](README.md)｜[中](README.zh_CN.md) 
+[English](README.md)｜[中](README.zh_CN.md)
+
 # Blender addon for driving character
 
-The addon drives the cartoon character by passing SMPL's poses and global translation into 3D model's armature in Blender. Poses and global translation can be obtained from ROMP or any other 3D pose estimation model. If the model outputs poses and global translation at a high FPS, you can drive cartoon characters in Blender in real-time.
+The addon drives a 3D cartoon character by transferring SMPL's pose and global translation into the skeleton of the 3D character. Poses and global translation can be obtained from RGB images using ROMP or any SMPL-based 3D pose estimation model. If the estimation model outputs pose and global position at a high speed, then you can achieve the effect of driving 3D characters in real time in Blender.
 
-## Demo
+## Two Pipeline
+
+### From Video to Animation
 
 ![image](demo/demo1.gif)
+
+Example:
+
+1. Modify the path of [demo1.npy](demo/demo1.npy) in [server.py](src/server.py) and start server.py on the CLI
+2. Open [Beat.blend](Blender/Beta.blend) and click on the triangle in the upper right corner
+   ![图 2](images/c52b11b344f633d7d60dd2c3a4fd8af0057c2a873f5868227e5c3e3b6c27b37f.png)
+3. Go back to the Layout view and click on the small icon in the upper right to get the Texture. Change the video keyframe in the lower right to 1.Select Armature and its children from the list of elements on the right by holding down Shift
+   ![图 3](images/6ecb42e47e9befecf4a6492e0dbeef3ee9fc2a545b8f708b37acf98a4fa508a9.png)
+4. Press Ctrl+E to run the addon. At this time, the keyframe that is being transferred is displayed in the command line running server.py
+   ![图 4](images/1a7a853daa25f17230482437550e1d94f22252f0b02807ab105eeb6a2bd8ae30.png)
+5. Press the space in Blender to view the character animation
+
+> If you want to use your own video, you need to use [ROMP](https://github.com/Arthur151/ROMP)'s [video.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/video.sh) to get a npz file.Then you need to adjust the data format in the npz file to match the [Data Format](#data-format).
+
+### The Webcam Drive Character in Real-Time
+
 ![image](demo/demo2.gif)
 
-The first demo uses ROMP outputs from the video, which is stored in a file.
+Example:
 
-The second demo uses ROMP outputs from the webcam in real-time.
+1. Connect the camera and run ROMP's [webcam_blender.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/webcam_blender.sh).
+2. The rest of the steps are the same as steps 2, 3, and 4 of `From Video to Animation`, where the 3D characters in Blender are driven in real time by pressing Ctrl+E.
 
-The 3D character is downloaded from [Mixamo](https://www.mixamo.com/#/).
 
-##
-
-## How to Use the [add-on](src/characterDriven.py)
+## Know-How
 
 ### Data Requester
 
-This addon is a data requester that sends a data request over TCP to `127.0.0.1:9999`.It gets one data at a time from the data server.
+The addon is a data requester that uses TCP to send data requests to `127.0.0.1:9999`. When the addon runs, it will continue to request data until the data sender either stops transferring or presses the A key in Blender.
 
-After running the addon by pressing ctrl+E in Blender, it keeps asking for data until the server closes the TCP connection. You can also press A to close the TCP connection.
+### Data Sender
 
-### Data Server
-
-The data server is bound to `127.0.0.1:9999`. After receiving a request from the data requester, one data is sent to the requester.
-
-I've written [server.py](src/server.py) as a example data server (you only need to know a little about Python TCP to understand it).
-
-Real-time data server can be found in [ROMP](https://github.com/Arthur151/ROMP).You just need to run [webcam_blender.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/webcam_blender.sh).
+The data sender is bound to '127.0.0.1:9999' and will continuously send data to it after receiving requests from the data requester.
 
 ### Data Format
 
@@ -41,34 +52,21 @@ The data is a Python list of four elements in the form of `[mode,poses,global tr
 3. Global translation is a list of length 3. If you don't need global translation, just go into [0,0,0].
 4. Current keyframe id is an integer.If you insert keyframes, you should set it to the correct keyframe id. If you don't insert keyframes, just set it to 0.
 
-### Steps
+## Use Your Own 3D Character
 
-1. Install the addon in Blender
-2. Run data server
-3. Press Ctrl+E in Blender to run addon
-4. Press A in Blender to stop addon or wait until the data transfer is complete
-
-> In step 3, you'd better make Armature active, otherwise bugs may occur (key "Pelvis" not found'). Also, the mouse must be placed in the 3D viewport area(where the 3d model is), otherwise the addon will not run.
-
-![picture 1](images/f385c458c9c3531c74c411689ce74a0cf4ffca92588888b9764775f8c7087f75.png)
-
-## Something about Blender
-
-If you're not familiar with Blender, I've upload a [blender project](/blender/Beta.blend) to help you.All you need to do is open it and follow [Steps](#steps) to achieve the effect shown in the Demo.(It's better to know something about [animation](https://www.bilibili.com/video/BV1zh411Y7LX?from=search&seid=4554151926894860198&spm_id_from=333.337.0.0) in Blender.)
-
-If you need a video background in the demo, select Compositing in the top menu bar, click Open Clip in the Movie Clip, and select your video.
-
-![图 2](/images/7cabdcf52c78b5a42642a9acb0d1b835f54376f10fdd11f416e455e5e3b24fc5.png)
-
-If you are familiar with Blender and want to use your own model, you should make sure it's armature is SMPL's skeleton. The armature should name Armature and each bone has the same name as the bones in [demo model](blender/Alpha.fbx)(Only the 24 bones of SMPL skeleton are needed, and the fingers don't need to change their names).
+If you are familiar with Blender and you want to use your own 3D characters, make sure that the skeleton is exactly the same as the SMPL's skeleton and that the bones are named the same as the bones of my 3D characters (of course, you can also change the bone names in the addon). All the 24 bones in SMPL need to be named the same. There is no need to change the name of the finger bones.
 
 ![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)
+## Background
 
-## Useful Resources
+If you need a video background in the demo, select Compositing in the top menu bar, click Open Clip in the Movie Clip, and select your video.(It is better not to add video in real-time drive, adding images will be smoother)
 
-- [Mixamo](https://www.mixamo.com/#/)
+![图 7](images/57480e4a863cb8f06bcb8581279a5669849d31a88ed17c6717422f707acdb0d3.png)  
+
+## Acknowledgement
+
+- 3D characters are downloaded from [Mixamo](https://www.mixamo.com/#/)
 - [Blender 2.8](https://www.bilibili.com/video/BV1T4411N7GE?spm_id_from=333.999.0.0)
-- [Blender 2.9-3.0](https://www.bilibili.com/video/BV1zh411Y7LX?from=search&seid=12526205672689328022&spm_id_from=333.337.0.0)
 - [Blender Manual](https://docs.blender.org/manual/en/latest/)
 - [Blender Python API](https://docs.blender.org/api/current/index.html)
 - [neuron_mocap_live-blender](https://github.com/pnmocap/neuron_mocap_live-blender)

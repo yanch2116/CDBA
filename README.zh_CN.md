@@ -37,7 +37,7 @@
 
 ### 数据请求端
 
-该插件是一个数据请求端，使用TCP向127.0.0.1:9999发送数据请求。当该插件运行后，它会持续请求数据直到数据发送端停止传输或在Blender中按下A键。
+该插件是一个数据请求端，使用TCP向`127.0.0.1:9999`发送数据请求。当该插件运行后，它会持续请求数据直到数据发送端停止传输或在Blender中按下A键。
 
 ### 数据发送端
 
@@ -49,7 +49,7 @@
 
 1. Mode是一个整数, 1 代表将数据插入Blender后保存关键帧, 0 则是不保存。 如果想要渲染动画，那么保存关键帧是有必要的；但是实时驱动时，不保存关键帧会让驱动更加流畅。
 2. Poses是一个长度为72的python列表，是骨头的24个转换矩阵。
-3. Global translation是一个长度为3的python列表。如果你不需要全局位置, 将其设为[0,0,0].
+3. Global translation是一个长度为3的python列表。如果你不需要全局位置, 将其设为[0,0,0]。
 4. Current keyframe id是一个整数。如果你保存当前关键帧，你需要将其它设置为关键帧的id；如果你不保存当前关键帧，设置为0即可。
 
 ## 使用你自己的3D人物
@@ -71,9 +71,9 @@
 ## 致谢
 
 - [Mixamo](https://www.mixamo.com/#/)：3D人物从该网站下载
-- [Blender 2.8](https://www.bilibili.com/video/BV1T4411N7GE?spm_id_from=333.999.0.0)：第零、一、十三章的尤其有用
-- [Blender Manual](https://docs.blender.org/manual/en/latest/)：Blender官方文档
-- [Blender Python API](https://docs.blender.org/api/current/index.html)：Blender Python官方教程和文档
+- [Blender 2.8](https://www.bilibili.com/video/BV1T4411N7GE?spm_id_from=333.999.0.0)：第零、一、十三章的知识尤其有用
+- [Blender Manual](https://docs.blender.org/manual/en/latest/)
+- [Blender Python API](https://docs.blender.org/api/current/index.html)
 - [neuron_mocap_live-blender](https://github.com/pnmocap/neuron_mocap_live-blender)
 - [QuickMocap-BlenderAddon](https://github.com/vltmedia/QuickMocap-BlenderAddon)
 - [remote-opencv-streaming-live-video](https://github.com/rena2damas/remote-opencv-streaming-live-video)
