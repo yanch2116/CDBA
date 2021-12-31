@@ -27,13 +27,9 @@ class CharacterDriven(bpy.types.Operator):
         s.connect(('127.0.0.1', 9999))
         SMPL_Importer_ = SMPL_Importer(ctx)
 
-        armature = bpy.data.objects['Armature']
-
-        bpy.context.view_layer.objects.active = armature
-        bpy.ops.object.mode_set(mode='EDIT')
-        pelvis_bone = armature.data.edit_bones['Pelvis']
+        pelvis_bone = bpy.data.armatures['Armature'].bones['Pelvis']
         pelvis_position = Vector(pelvis_bone.head)
-        bpy.ops.object.mode_set(mode='OBJECT')
+
 
         ctx.window_manager.modal_handler_add(self)
         mocap_timer = ctx.window_manager.event_timer_add(

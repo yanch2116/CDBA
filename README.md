@@ -15,8 +15,8 @@ Example:
 1. Modify the path of [demo1.npy](demo/demo1.npy) in [server.py](src/server.py) and start server.py on the CLI
 2. Open [Beat.blend](Blender/Beta.blend) and click on the triangle in the upper right corner
    ![图 2](images/c52b11b344f633d7d60dd2c3a4fd8af0057c2a873f5868227e5c3e3b6c27b37f.png)
-3. Go back to the Layout view and click on the small icon in the upper right to get the Texture. Change the video keyframe in the lower right to 1.Select Armature and its children from the list of elements on the right by holding down Shift
-   ![图 3](images/6ecb42e47e9befecf4a6492e0dbeef3ee9fc2a545b8f708b37acf98a4fa508a9.png)
+3. Go back to the Layout view and click on the small icon in the upper right to get the Texture
+   ![图 1](images/bc3d69615afb7829359475a04e4dd024732f8a70736b7433a7aaf93888dc2be7.png)  
 4. Press Ctrl+E to run the addon. At this time, the keyframe that is being transferred is displayed in the command line running server.py
    ![图 4](images/1a7a853daa25f17230482437550e1d94f22252f0b02807ab105eeb6a2bd8ae30.png)
 5. Press the space in Blender to view the character animation
@@ -30,7 +30,7 @@ Example:
 Example:
 
 1. Connect the camera and run ROMP's [webcam_blender.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/webcam_blender.sh).
-2. The rest of the steps are the same as steps 2, 3, and 4 of `From Video to Animation`, where the 3D characters in Blender are driven in real time by pressing Ctrl+E.
+2. The rest of the steps are the same as steps 2, 3 of `From Video to Animation`, where the 3D characters in Blender are driven in real time by pressing Ctrl+E.
 
 
 ## Know-How

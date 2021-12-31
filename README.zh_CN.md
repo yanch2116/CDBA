@@ -15,8 +15,8 @@
 1. 修改[server.py](src/server.py)中的[demo1.npy](demo/demo1.npy)路径，并在命令行启动 server.py
 2. 打开[Beta.blend](blender/Beta.blend)，并点击右上角三角，看到左下角提示，说明插件运行成功
    ![图 2](images/c52b11b344f633d7d60dd2c3a4fd8af0057c2a873f5868227e5c3e3b6c27b37f.png)
-3. 回到 layout 视图，点击右上角小图标获取 Texture，将右下角视频关键帧调整至 1，将右边元素列表按住 Shift 选中 Armature 及其子元素
-   ![图 3](images/6ecb42e47e9befecf4a6492e0dbeef3ee9fc2a545b8f708b37acf98a4fa508a9.png)
+3. 回到 layout 视图，点击右上角小图标获取 Texture
+   ![图 1](images/bc3d69615afb7829359475a04e4dd024732f8a70736b7433a7aaf93888dc2be7.png)  
 4. 按下 Ctrl+E 运行插件，此时在运行 server.py 的命令行中会提示当前正在传输的关键帧，传输结束后连接断开
    ![图 4](images/1a7a853daa25f17230482437550e1d94f22252f0b02807ab105eeb6a2bd8ae30.png)
 5. 在 Blender 中按下空格键即可观看到人物动画
@@ -30,7 +30,7 @@
 使用示例：
 
 1. 连接摄像头，启动 ROMP 的 [webcam_blender.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/webcam_blender.sh).
-2. 其余步骤与从视频到动画的2、3、4相同，按下Ctrl+E后，Blender中的3D人物便会实时驱动
+2. 其余步骤与从视频到动画的2、3相同，按下Ctrl+E后，Blender中的3D人物便会实时驱动
 
 
 ## 原理
