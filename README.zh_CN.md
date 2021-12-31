@@ -29,8 +29,8 @@
 
 使用示例：
 
-1. 连接摄像头，启动 ROMP 的 [webcam_blender.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/webcam_blender.sh).
-2. 其余步骤与从视频到动画的2、3相同，按下Ctrl+E后，Blender中的3D人物便会实时驱动
+1. 连接摄像头，启动 ROMP 的 [webcam_blender.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/webcam_blender.sh)
+2. 其余步骤与从视频到动画的2、3相同，按下Ctrl+E后，Blender中的3D人物便会实时驱动；按下A键便能够停下来
 
 
 ## 原理
