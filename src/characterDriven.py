@@ -21,14 +21,23 @@ class CharacterDriven(bpy.types.Operator):
         global mocap_timer
         global SMPL_Importer_
         global s
+        global pelvis_position
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect(('127.0.0.1', 9999))
         SMPL_Importer_ = SMPL_Importer(ctx)
 
+        armature = bpy.data.objects['Armature']
+
+        bpy.context.view_layer.objects.active = armature
+        bpy.ops.object.mode_set(mode='EDIT')
+        pelvis_bone = armature.data.edit_bones['Pelvis']
+        pelvis_position = Vector(pelvis_bone.head)
+        bpy.ops.object.mode_set(mode='OBJECT')
+
         ctx.window_manager.modal_handler_add(self)
         mocap_timer = ctx.window_manager.event_timer_add(
-            1 / 60, window=ctx.window)
+            1 / 120, window=ctx.window)
 
         return {'RUNNING_MODAL'}
 
@@ -39,7 +48,8 @@ class CharacterDriven(bpy.types.Operator):
             if data:
                 data = json.loads(data.decode('utf-8'))
                 mode, poses, trans, frame = data
-                SMPL_Importer_.process_poses(mode, poses, trans, frame)
+                SMPL_Importer_.process_poses(
+                    mode, poses, trans, frame, pelvis_position)
             else:
                 s.close()
                 return {'FINISHED'}
@@ -91,13 +101,8 @@ class SMPL_Importer:
                           [-r[1], r[0], 0]])
         return(cost*np.eye(3) + (1-cost)*r.dot(r.T) + np.sin(theta)*mat)
 
-    def process_poses(self, mode, poses, trans, current_frame):
+    def process_poses(self, mode, poses, trans, current_frame, pelvis_position):
         armature = bpy.data.objects['Armature']
-
-        bpy.ops.object.mode_set(mode='EDIT')
-        pelvis_bone = armature.data.edit_bones[self.bone_name_from_index[0]]
-        pelvis_position = Vector(pelvis_bone.head)
-        bpy.ops.object.mode_set(mode='OBJECT')
 
         poses = np.array(poses)
         trans = np.array(trans)
