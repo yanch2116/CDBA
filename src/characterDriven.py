@@ -140,6 +140,7 @@ class SMPL_Importer:
             if mode == 1:
                 bone.keyframe_insert(
                     'rotation_quaternion', frame=current_frame)
+            bpy.context.scene.frame_end = current_frame
 
         return
 
