@@ -13,10 +13,10 @@ The addon drives a 3D cartoon character by transferring SMPL's pose and global t
 Steps:
 
 1. Modify the path of [results.npz](demo/results.npz) in [server.py](src/server.py) and start server.py in the command line.
-2. Open [Beat.blend](Blender/Beta.blend) and click on the triangle in the upper right corner.
+2. Open [Beta.blend](blender/Beta.blend) and click on the triangle in the upper right corner.
    ![图 2](images/c52b11b344f633d7d60dd2c3a4fd8af0057c2a873f5868227e5c3e3b6c27b37f.png)
 3. Go back to the Layout view and click on the small icon in the upper right to get the Texture.
-   ![图 1](images/bc3d69615afb7829359475a04e4dd024732f8a70736b7433a7aaf93888dc2be7.png)  
+   ![图 1](images/bc3d69615afb7829359475a04e4dd024732f8a70736b7433a7aaf93888dc2be7.png)
 4. Press Ctrl+E to run the addon. At this time, the keyframe that is being transferred is displayed in the command line running server.py.
    ![图 4](images/1a7a853daa25f17230482437550e1d94f22252f0b02807ab105eeb6a2bd8ae30.png)
 5. Press the space in Blender to view the character animation.
@@ -37,11 +37,12 @@ Steps:
 If you are familiar with Blender and you want to use your own 3D characters, make sure that the skeleton is exactly the same as the SMPL's skeleton and that the bones are named the same as the bones of my 3D characters (of course, you can also change the bone names in the addon). All the 24 bones in SMPL need to be named the same. There is no need to change the name of the finger bones.
 
 ![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)
+
 ## Use Your Own Background
 
 If you need a video background in the demo, select Compositing in the top menu bar, click Open Clip in the Movie Clip, and select your video.It is best not to use video as a background when driving in real time to prevent animations from getting too stuck.
 
-![图 7](images/57480e4a863cb8f06bcb8581279a5669849d31a88ed17c6717422f707acdb0d3.png)  
+![图 7](images/57480e4a863cb8f06bcb8581279a5669849d31a88ed17c6717422f707acdb0d3.png)
 
 ## Acknowledgement
 
