@@ -10,7 +10,7 @@
 
 ![image](demo/demo1.gif)
 
-使用示例：
+步骤：
 
 1. 修改[server.py](src/server.py)中的[results.npz](demo/results.npz)路径，并在命令行启动 server.py
 2. 打开[Beta.blend](blender/Beta.blend)，并点击右上角三角，看到左下角提示，说明插件运行成功
@@ -27,10 +27,10 @@
 
 ![image](demo/demo2.gif)
 
-使用示例：
+步骤：
 
 1. 连接摄像头，启动 ROMP 的 [webcam_blender.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/webcam_blender.sh)
-2. 其余步骤与从视频到动画的2、3相同，按下Ctrl+E后，Blender中的3D人物便会实时驱动；按下A键便能够停下来
+2. 其余步骤与`从视频到动画`的2、3相同，按下Ctrl+E后，Blender中的3D人物便会实时驱动；按下A键便能够停下来
 
 
 ## 使用你自己的3D人物
@@ -40,7 +40,7 @@
 ![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)
 ## 是用你自己的动画背景
 
-当你渲染动画时，你可能希望有一个好看点的背景。我在Compositing中设置好了添加背景的方法，你只需要点击Open Clip，选中自己的视频即可。（在实时驱动时最好不要添加，防止动画太卡）
+当你渲染动画时，你可能希望有一个好看点的背景。我在Compositing中设置好了添加背景的方法，你只需要点击Open Clip，选中自己的视频即可。在实时驱动时最好不要添加视频，防止动画太卡。
 
 ![图 7](images/57480e4a863cb8f06bcb8581279a5669849d31a88ed17c6717422f707acdb0d3.png)  
 
