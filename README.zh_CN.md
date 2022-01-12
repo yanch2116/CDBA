@@ -21,7 +21,7 @@
    ![图 4](images/1a7a853daa25f17230482437550e1d94f22252f0b02807ab105eeb6a2bd8ae30.png)
 5. 在 Blender 中按下空格键即可观看到人物动画
 
-> 如果你想要使用自己的视频，你需要使用 [ROMP](<(https://github.com/Arthur151/ROMP)>) 的[video.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/video.sh)获取 npz 文件，并将 npz 文件中的数据格式根据[数据格式](#数据格式)调整好，再进行传输。
+> 如果你想要使用自己的视频，你需要使用 [ROMP](<(https://github.com/Arthur151/ROMP)>) 的[video.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/video.sh)获取 npz 文件，并将 npz 文件中的数据格式根据[数据格式](#数据格式)调整好，再进行传输。或者你可以直接使用[脚本](src/npzToNpy.py)进行转换.
 
 ### 摄像头实时驱动3D人物
 

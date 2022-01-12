@@ -8,7 +8,7 @@ mode = 1    # 0 stands for no insert keyframe,1 stands for insert keyframe
 
 
 def getData():
-    path = '/Users/yanch/Desktop/CharacterDriven-BlenderAddon/demo/demo1.npy'
+    path = '/Users/yanch/Documents/Practices/CharacterDriven-BlenderAddon/demo/demo1.npy'
     data = np.load(path, allow_pickle=True)
     print(data.shape)
     data = list(data)

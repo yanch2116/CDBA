@@ -21,7 +21,7 @@ Example:
    ![图 4](images/1a7a853daa25f17230482437550e1d94f22252f0b02807ab105eeb6a2bd8ae30.png)
 5. Press the space in Blender to view the character animation
 
-> If you want to use your own video, you need to use [ROMP](https://github.com/Arthur151/ROMP)'s [video.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/video.sh) to get a npz file.Then you need to adjust the data format in the npz file to match the [Data Format](#data-format).
+> If you want to use your own video, you need to use [ROMP](https://github.com/Arthur151/ROMP)'s [video.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/video.sh) to get a npz file.Then you need to adjust the data format in the npz file to match the [Data Format](#data-format).Or you can use [the script](src/npzToNpy.py) directly for conversion.
 
 ### The Webcam Drive Character in Real-Time
 
