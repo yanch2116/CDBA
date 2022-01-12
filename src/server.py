@@ -7,6 +7,7 @@ global mode
 mode = 1
 
 def getData():
+    # Replace Your Own npz File PATH
     npz_path = '../demo/results.npz'
     a = np.load(
         npz_path, allow_pickle=True)['results'][()]
