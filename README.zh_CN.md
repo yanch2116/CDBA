@@ -12,7 +12,7 @@
 
 使用示例：
 
-1. 修改[server.py](src/server.py)中的[demo1.npy](demo/demo1.npy)路径，并在命令行启动 server.py
+1. 修改[server.py](src/server.py)中的[results.npz](demo/results.npz)路径，并在命令行启动 server.py
 2. 打开[Beta.blend](blender/Beta.blend)，并点击右上角三角，看到左下角提示，说明插件运行成功
    ![图 2](images/c52b11b344f633d7d60dd2c3a4fd8af0057c2a873f5868227e5c3e3b6c27b37f.png)
 3. 回到 layout 视图，点击右上角小图标获取 Texture
@@ -21,7 +21,7 @@
    ![图 4](images/1a7a853daa25f17230482437550e1d94f22252f0b02807ab105eeb6a2bd8ae30.png)
 5. 在 Blender 中按下空格键即可观看到人物动画
 
-> 如果你想要使用自己的视频，你需要使用 [ROMP](<(https://github.com/Arthur151/ROMP)>) 的[video.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/video.sh)获取 npz 文件，并将 npz 文件中的数据格式根据[数据格式](#数据格式)调整好，再进行传输。或者你可以直接使用[脚本](src/npzToNpy.py)进行转换.
+> 如果你想要使用自己的视频，你需要使用 [ROMP](<(https://github.com/Arthur151/ROMP)>) 的[video.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/video.sh)获取 npz 文件。
 
 ### 摄像头实时驱动3D人物
 
@@ -33,40 +33,16 @@
 2. 其余步骤与从视频到动画的2、3相同，按下Ctrl+E后，Blender中的3D人物便会实时驱动；按下A键便能够停下来
 
 
-## 原理
-
-### 数据请求端
-
-该插件是一个数据请求端，使用TCP向`127.0.0.1:9999`发送数据请求。当该插件运行后，它会持续请求数据直到数据发送端停止传输或在Blender中按下A键。
-
-### 数据发送端
-
-数据发送端绑定在`127.0.0.1:9999`，当其获得数据请求端的请求后，便会不断向其发送数据。
-
-### 数据格式
-
-数据格式是一个Python列表，形如 `[mode,poses,global translation,current keyframe id]`，每个元素的含义如下：
-
-1. Mode是一个整数, 1 代表将数据插入Blender后保存关键帧, 0 则是不保存。 如果想要渲染动画，那么保存关键帧是有必要的；但是实时驱动时，不保存关键帧会让驱动更加流畅。
-2. Poses是一个长度为72的python列表，是骨头的24个转换矩阵。
-3. Global translation是一个长度为3的python列表。如果你不需要全局位置, 将其设为[0,0,0]。
-4. Current keyframe id是一个整数。如果你保存当前关键帧，你需要将其它设置为关键帧的id；如果你不保存当前关键帧，设置为0即可。
-
 ## 使用你自己的3D人物
 
 如果你对Blender很熟悉，你希望使用自己的3D人物，那么你需要确保它的骨架与SMPL骨架完全一致，并且各骨头的命名也与我的3D人物的骨头命名一致（当然，你也可以修改插件中的骨头命名）。只需要SMPL的24个骨头命名保持一致即可，不需要改变手指骨头的命名。
 
 ![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)
-## 动画背景
+## 是用你自己的动画背景
 
-当你渲染动画时，你可能希望有一个好看点的背景。我在Compositing中设置好了添加背景的方法，你只需要点击Open Clip，选中自己的视频即可。（在实时驱动时最好不要添加，添加图片会更加流畅）
+当你渲染动画时，你可能希望有一个好看点的背景。我在Compositing中设置好了添加背景的方法，你只需要点击Open Clip，选中自己的视频即可。（在实时驱动时最好不要添加，防止动画太卡）
 
 ![图 7](images/57480e4a863cb8f06bcb8581279a5669849d31a88ed17c6717422f707acdb0d3.png)  
-
-
-
-
-
 
 ## 致谢
 
