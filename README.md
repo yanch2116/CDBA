@@ -13,7 +13,7 @@ The addon drives a 3D cartoon character by transferring SMPL's pose and global t
 Steps:
 
 1. Modify the path of [results.npz](demo/results.npz) in [server.py](src/server.py) and start server.py in the command line.
-2. Open [Beta.blend](blender/Beta.blend) and click on the triangle in the upper right corner.If a message is displayed in the lower left corner, the addon is running successfully.
+2. Open [Beta.blend](blender/Beta.blend) or [SMPL.blend](blender/SMPL.blend) and click on the triangle in the upper right corner.If a message is displayed in the lower left corner, the addon is running successfully.
    ![图 2](images/c52b11b344f633d7d60dd2c3a4fd8af0057c2a873f5868227e5c3e3b6c27b37f.png)
 3. Go back to the Layout view and click on the small icon in the upper right to get the Texture.
    ![图 1](images/bc3d69615afb7829359475a04e4dd024732f8a70736b7433a7aaf93888dc2be7.png)

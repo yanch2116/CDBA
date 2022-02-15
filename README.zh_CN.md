@@ -13,7 +13,7 @@
 步骤：
 
 1. 修改[server.py](src/server.py)中的[results.npz](demo/results.npz)路径，并在命令行启动 server.py
-2. 打开[Beta.blend](blender/Beta.blend)，并点击右上角三角，看到左下角提示，说明插件运行成功
+2. 打开[Beta.blend](blender/Beta.blend)或[SMPL.blend](blender/SMPL.blend)，并点击右上角三角，看到左下角提示，说明插件运行成功
    ![图 2](images/c52b11b344f633d7d60dd2c3a4fd8af0057c2a873f5868227e5c3e3b6c27b37f.png)
 3. 回到 layout 视图，点击右上角小图标获取 Texture
    ![图 1](images/bc3d69615afb7829359475a04e4dd024732f8a70736b7433a7aaf93888dc2be7.png)  
