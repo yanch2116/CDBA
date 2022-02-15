@@ -30,7 +30,6 @@ class CharacterDriven(bpy.types.Operator):
         pelvis_bone = bpy.data.armatures['Armature'].bones['Pelvis']
         pelvis_position = Vector(pelvis_bone.head)
 
-
         ctx.window_manager.modal_handler_add(self)
         mocap_timer = ctx.window_manager.event_timer_add(
             1 / 120, window=ctx.window)
@@ -111,8 +110,8 @@ class SMPL_Importer:
         mat_rots = [self.Rodrigues(rod_rot) for rod_rot in rod_rots]
 
         bones = armature.pose.bones
-        bones[self.bone_name_from_index[0]].location = Vector(
-            (100*trans[1], 100*trans[2], 100*trans[0])) - pelvis_position
+        # bones[self.bone_name_from_index[0]].location = Vector((100*trans[1], 100*trans[2], 100*trans[0])) - pelvis_position
+        bones[self.bone_name_from_index[0]].location = Vector((trans[1], trans[2], trans[0])) - pelvis_position
         if mode == 1:
             bones[self.bone_name_from_index[0]].keyframe_insert(
                 'location', frame=current_frame)
@@ -141,7 +140,6 @@ class SMPL_Importer:
                 bone.keyframe_insert(
                     'rotation_quaternion', frame=current_frame)
             bpy.context.scene.frame_end = current_frame
-
 
         return
 

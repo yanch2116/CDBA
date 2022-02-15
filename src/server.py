@@ -4,7 +4,7 @@ import threading
 import numpy as np
 
 global mode
-mode = 1
+mode = 1  # 0 stands for no insert keyframe,1 stands for insert keyframe
 
 def getData():
     # Replace Your Own npz File PATH
@@ -31,6 +31,7 @@ def tcplink(sock, addr):
             break
         poses = data[frame][:72]
         trans = data[frame][72:75]
+        print(trans)
         # The data is [mode,poses,trans,current_frame]
         send_data = json.dumps([mode, poses, trans, frame+1]).encode('utf-8')
         print('The current frame is {}'.format(frame+1))
