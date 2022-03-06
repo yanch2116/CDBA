@@ -1,11 +1,11 @@
+# custom
+*.blend1
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-.DS_Store
-patent
-*.blend1
-*.fbx
 
 # C extensions
 *.so

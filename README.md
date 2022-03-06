@@ -1,5 +1,3 @@
-[English](README.md)｜[中](README.zh_CN.md)
-
 # Blender addon for driving character
 
 The addon drives a 3D cartoon character by transferring SMPL's pose and global translation into the skeleton of the 3D character. Poses and global translation can be obtained from RGB images using ROMP or any SMPL-based 3D pose estimation model. If the estimation model outputs pose and global position at a high speed, then you can achieve the effect of driving 3D characters in real time in Blender.
@@ -40,7 +38,7 @@ If you are familiar with Blender and you want to use your own 3D characters, mak
 
 ## Use Your Own Background
 
-If you need a video background in the demo, select Compositing in the top menu bar, click Open Clip in the Movie Clip, and select your video.It is best not to use video as a background when driving in real time to prevent animations from getting too stuck.
+If you need a video background in the demo, select Compositing in the top menu bar, click Open Clip in the Movie Clip, and select your video. It is best not to use video as a background when driving in real time to prevent animations from getting too stuck.
 
 ![图 7](images/57480e4a863cb8f06bcb8581279a5669849d31a88ed17c6717422f707acdb0d3.png)
 
@@ -52,4 +50,3 @@ If you need a video background in the demo, select Compositing in the top menu b
 - [Blender Python API](https://docs.blender.org/api/current/index.html)
 - [neuron_mocap_live-blender](https://github.com/pnmocap/neuron_mocap_live-blender)
 - [QuickMocap-BlenderAddon](https://github.com/vltmedia/QuickMocap-BlenderAddon)
-- [remote-opencv-streaming-live-video](https://github.com/rena2damas/remote-opencv-streaming-live-video)
