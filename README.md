@@ -47,3 +47,4 @@ If you need a video background in the demo, select Compositing in the top menu b
 - 3D character is downloaded from [Mixamo](https://www.mixamo.com/#/)
 - [neuron_mocap_live-blender](https://github.com/pnmocap/neuron_mocap_live-blender)
 - [QuickMocap-BlenderAddon](https://github.com/vltmedia/QuickMocap-BlenderAddon)
+- [remote-opencv-streaming-live-video](https://github.com/rena2damas/remote-opencv-streaming-live-video)
