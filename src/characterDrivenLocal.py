@@ -1,57 +1,30 @@
-from mathutils import Matrix, Vector, Quaternion
+from mathutils import Matrix, Vector, Quaternion,Euler
 from math import radians
 import numpy as np
 import bpy
-import json
-import socket
 
-class CharacterDriven(bpy.types.Operator):
-    bl_idname = 'yanch.characterdriven'
-    bl_label = 'characterdriven'
+def getData():
+    # Replace Your Own npz File PATH
+    npz_path = './demo/results.npz'
+    a = np.load(
+        npz_path, allow_pickle=True)['results'][()]
+    data = []
+    # results_ts.npz
+    # for key in a[0]:
+    #     data.append(a[0][key]['poses'])
+    # results.npz
 
-    def execute(self, ctx):
-        global mocap_timer
-        global SMPL_Importer_
-        global s
-        global pelvis_position
-
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect(('127.0.0.1', 9999))
-        SMPL_Importer_ = SMPL_Importer(ctx)
-
-        pelvis_bone = bpy.data.armatures['Armature'].bones['Pelvis']
-        pelvis_position = Vector(pelvis_bone.head)
-
-        ctx.window_manager.modal_handler_add(self)
-        mocap_timer = ctx.window_manager.event_timer_add(
-            1 / 120, window=ctx.window)
-
-        return {'RUNNING_MODAL'}
-
-    def modal(self, ctx, evt):
-        if evt.type == 'TIMER':
-            s.send(b'1')
-            data = s.recv(4096)
-            if data:
-                data = json.loads(data.decode('utf-8'))
-                mode, poses, trans, frame = data
-                SMPL_Importer_.process_poses(
-                    mode, poses, trans, frame, pelvis_position)
-            else:
-                s.close()
-                return {'FINISHED'}
-
-        if evt.type == 'A':
-            s.close()
-            return {'FINISHED'}
-
-        return {'RUNNING_MODAL'}
+    for key in a:
+        temp = np.append(a[key][0]['poses'], a[key][0]['trans'])
+        data.append(temp)
+    data = list(data)
+    for i in range(len(data)):
+        data[i] = list(data[i])
+    return data
 
 
 class SMPL_Importer:
-
     def __init__(self, context):
-
         self.bone_name_from_index = {
             0: 'Pelvis',
             1: 'L_Hip',
@@ -94,9 +67,7 @@ class SMPL_Importer:
         poses = np.array(poses)
         trans = np.array(trans)
 
-
         rod_rots = poses.reshape(24, 3)
-        rod_rots = poses.reshape(26, 3)
 
         mat_rots = [self.Rodrigues(rod_rot) for rod_rot in rod_rots]
 
@@ -121,7 +92,6 @@ class SMPL_Importer:
             quat_y_90_cw = Quaternion((0.0, 1.0, 0.0), radians(-90))
             quat_z_90_cw = Quaternion((0.0, 0.0, 1.0), radians(-90))
 
-
             if index == 0:
                 # Rotate pelvis so that avatar stands upright and looks along negative Y avis
                 bone.rotation_quaternion = (
@@ -135,6 +105,22 @@ class SMPL_Importer:
 
         return
 
+
+class CharacterDriven(bpy.types.Operator):
+    bl_idname = 'yanch.characterdriven'
+    bl_label = 'characterdriven'
+
+    def execute(self, ctx):
+        poses = getData()
+        SMPL_Importer_ = SMPL_Importer(ctx)
+        pelvis_bone = bpy.data.armatures['Armature'].bones['Pelvis']
+        pelvis_position = Vector(pelvis_bone.head)
+        i = 0
+        for pose in poses:
+            i += 1
+            SMPL_Importer_.process_poses(
+                1, pose[:72], pose[72:], i, pelvis_position)
+        return {'FINISHED'}
 
 addon_keymaps = []
 

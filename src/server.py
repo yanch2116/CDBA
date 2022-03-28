@@ -31,7 +31,6 @@ def tcplink(sock, addr):
             break
         poses = data[frame][:72]
         trans = data[frame][72:75]
-        print(trans)
         # The data is [mode,poses,trans,current_frame]
         send_data = json.dumps([mode, poses, trans, frame+1]).encode('utf-8')
         print('The current frame is {}'.format(frame+1))

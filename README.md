@@ -32,13 +32,13 @@ Steps:
 
 ## Use Your Own 3D Character
 
-If you are familiar with Blender and you want to use your own 3D characters, make sure that the skeleton is exactly the same as the SMPL's skeleton and that the bones are named the same as the bones of my 3D characters (of course, you can also change the bone names in the addon). All the 24 bones in SMPL need to be named the same. There is no need to change the name of the finger bones.
+If you are familiar with Blender and you want to use your own 3D character, make sure the base pose is T-pose and every joint's intial orientation is the identity matrix. In order to drive the character, the bones need to be named in the same way as the variables in the figure.
 
 ![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)
 
 ## Use Your Own Background
 
-If you need a video background in the demo, select Compositing in the top menu bar, click Open Clip in the Movie Clip, and select your video. It is best not to use video as a background when driving in real time to prevent animations from getting too stuck.
+If you need a video background in the demo, select Compositing in the top menu bar, click Open Clip in the Movie Clip, and select your video. It is best not to use video as a background when driving in real time.
 
 ![图 7](images/57480e4a863cb8f06bcb8581279a5669849d31a88ed17c6717422f707acdb0d3.png)
 
@@ -47,4 +47,3 @@ If you need a video background in the demo, select Compositing in the top menu b
 - 3D character is downloaded from [Mixamo](https://www.mixamo.com/#/)
 - [neuron_mocap_live-blender](https://github.com/pnmocap/neuron_mocap_live-blender)
 - [QuickMocap-BlenderAddon](https://github.com/vltmedia/QuickMocap-BlenderAddon)
-- [remote-opencv-streaming-live-video](https://github.com/rena2damas/remote-opencv-streaming-live-video)
