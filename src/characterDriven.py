@@ -94,15 +94,13 @@ class SMPL_Importer:
         poses = np.array(poses)
         trans = np.array(trans)
 
-
         rod_rots = poses.reshape(24, 3)
-        rod_rots = poses.reshape(26, 3)
 
         mat_rots = [self.Rodrigues(rod_rot) for rod_rot in rod_rots]
 
         bones = armature.pose.bones
-        bones[self.bone_name_from_index[0]].location = Vector((100*trans[1], 100*trans[2], 100*trans[0])) - pelvis_position
-        # bones[self.bone_name_from_index[0]].location = Vector((trans[1], trans[2], trans[0])) - pelvis_position
+        # bones[self.bone_name_from_index[0]].location = Vector((100*trans[1], 100*trans[2], 100*trans[0])) - pelvis_position
+        bones[self.bone_name_from_index[0]].location = Vector((trans[1], trans[2], trans[0])) - pelvis_position
         if mode == 1:
             bones[self.bone_name_from_index[0]].keyframe_insert(
                 'location', frame=current_frame)

@@ -13,7 +13,8 @@ def getData():
         npz_path, allow_pickle=True)['results'][()]
     data = []
     for key in a:
-        temp = np.append(a[key][0]['poses'], a[key][0]['trans'])
+        # temp = np.append(a[key][0]['poses'], a[key][0]['trans'])
+        temp = np.append(a[key][0]['poses'], [0,0,0])
         data.append(temp)
     data = list(data)
     for i in range(len(data)):

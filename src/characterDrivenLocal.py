@@ -5,7 +5,7 @@ import bpy
 
 def getData():
     # Replace Your Own npz File PATH
-    npz_path = './demo/results.npz'
+    npz_path = '/Users/yanch/Desktop/CharacterDriven-BlenderAddon/demo/results.npz'
     a = np.load(
         npz_path, allow_pickle=True)['results'][()]
     data = []
@@ -15,7 +15,8 @@ def getData():
     # results.npz
 
     for key in a:
-        temp = np.append(a[key][0]['poses'], a[key][0]['trans'])
+        # temp = np.append(a[key][0]['poses'], a[key][0]['trans'])
+        temp = np.append(a[key][0]['poses'], [0,0,0])
         data.append(temp)
     data = list(data)
     for i in range(len(data)):
@@ -62,8 +63,9 @@ class SMPL_Importer:
         return(cost*np.eye(3) + (1-cost)*r.dot(r.T) + np.sin(theta)*mat)
 
     def process_poses(self, mode, poses, trans, current_frame, pelvis_position):
-        armature = bpy.data.objects['Armature']
-
+        if not bpy.data.objects[0].parent:
+            armature = bpy.data.objects[0]
+        armature = bpy.data.objects[0].parent
         poses = np.array(poses)
         trans = np.array(trans)
 
@@ -72,8 +74,8 @@ class SMPL_Importer:
         mat_rots = [self.Rodrigues(rod_rot) for rod_rot in rod_rots]
 
         bones = armature.pose.bones
-        bones[self.bone_name_from_index[0]].location = Vector((100*trans[1], 100*trans[2], 100*trans[0])) - pelvis_position
-        # bones[self.bone_name_from_index[0]].location = Vector((trans[1], trans[2], trans[0])) - pelvis_position
+        # bones[self.bone_name_from_index[0]].location = Vector((100*trans[1], 100*trans[2], 100*trans[0])) - pelvis_position
+        bones[self.bone_name_from_index[0]].location = Vector((trans[1], trans[2], trans[0])) - pelvis_position
         if mode == 1:
             bones[self.bone_name_from_index[0]].keyframe_insert(
                 'location', frame=current_frame)
@@ -89,7 +91,7 @@ class SMPL_Importer:
             quat_x_90_cw = Quaternion((1.0, 0.0, 0.0), radians(-90))
             quat_x_n135_cw = Quaternion((1.0, 0.0, 0.0), radians(-135))
             quat_x_p45_cw = Quaternion((1.0, 0.0, 0.0), radians(45))
-            quat_y_90_cw = Quaternion((0.0, 1.0, 0.0), radians(-90))
+            quat_y_90_cw = Quaternion((0.0, 1.0, 0.0), radians(180))
             quat_z_90_cw = Quaternion((0.0, 0.0, 1.0), radians(-90))
 
             if index == 0:
@@ -113,7 +115,7 @@ class CharacterDriven(bpy.types.Operator):
     def execute(self, ctx):
         poses = getData()
         SMPL_Importer_ = SMPL_Importer(ctx)
-        pelvis_bone = bpy.data.armatures['Armature'].bones['Pelvis']
+        pelvis_bone = bpy.data.armatures[0].bones['Pelvis']
         pelvis_position = Vector(pelvis_bone.head)
         i = 0
         for pose in poses:
