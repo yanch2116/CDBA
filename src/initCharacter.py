@@ -30,10 +30,10 @@ if not name_changed:
         'RightForeArm': 'R_Elbow',
         'LeftHand': 'L_Wrist',
         'RightHand': 'R_Wrist',
-        'LeftHandThumb1': 'L_Hand',
+        'LeftHandIndex1': 'L_Hand',
         'LeftHandMiddle1': 'L_Hand',
         'RightHandMiddle1': 'R_Hand',
-        'RightHandThumb1': 'R_Hand',
+        'RightHandIndex1': 'R_Hand',
     }
     for key in bones_mixamo:
         for bone in armature.bones:
