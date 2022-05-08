@@ -30,17 +30,11 @@ Steps:
 1. Connect the camera and run ROMP's [webcam_blender.sh](https://github.com/Arthur151/ROMP/blob/master/scripts/webcam_blender.sh).
 2. The rest of the steps are the same as steps 2, 3 of `From Video to Animation`, where the 3D characters in Blender are driven in real time by pressing Ctrl+E.Press A to stop it.
 
-## Use Your Own 3D Character
+## To Do
 
-If you are familiar with Blender and you want to use your own 3D character, make sure the base pose is T-pose and every joint's intial orientation is the identity matrix. In order to drive the character, the bones need to be named in the same way as the variables in the figure.
-
-![图 3](/images/6b7e75964fd193b36ae58c94ddd99e6d234de6e085fb65d6f6691b476329b16c.png)
-
-## Use Your Own Background
-
-If you need a video background in the demo, select Compositing in the top menu bar, click Open Clip in the Movie Clip, and select your video. It is best not to use video as a background when driving in real time.
-
-![图 7](images/57480e4a863cb8f06bcb8581279a5669849d31a88ed17c6717422f707acdb0d3.png)
+- [ ] Write an UI
+- [ ] Make a video explaining how to use your own 3D characters
+- [ ] Write the sending interface for ROMP or BEV
 
 ## Acknowledgement
 
